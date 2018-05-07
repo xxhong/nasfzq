@@ -36,7 +36,7 @@
 
     <div class="jumbotron text-center">
         <h1>份子钱记账本</h1>
-        <p id="aaa" style="margin-top: 10px">一款基于<span style="color: #0044cc  "><a href="">星云链</a></span>的份子钱记账本</p>
+        <p id="aaa" style="margin-top: 10px">一款基于<span style="color: #0044cc  "><a href="https://incentive.nebulas.io/cn/signup.html?invite=7kBl2">星云链</a></span>的份子钱记账本</p>
         <p  style="margin-top: 20px">
             <button class="btn btn-primary " id="startBill">开始记账</button>
             <button class="btn btn-primary " id="checkRecord">查看账本</button>
@@ -519,15 +519,18 @@
                         $('#listContent').empty();
                         var dataListStr = resp.result;
                         var dataList = JSON.parse(dataListStr);
-                        dataList = dataList.reverse();
-                        var len = dataList.length;
-                        var str = '';
-                        for (var i=0; i<len; i++) {
-                            str += '<tr>' +
-                                    '<td>'+dataList[i]['name']+'</td><td>'+dataList[i]['money']+'</td><td>'+dataList[i]['cause']+'</td><td>'+dataList[i]['date']+'</td><td>'+dataList[i]['mark']+'</td><td>'+dataList[i]['type']+'</td>' +
-                                    '</tr>';
+                        if (dataList) {
+                            dataList = dataList.reverse();
+                            var len = dataList.length;
+                            var str = '';
+                            for (var i=0; i<len; i++) {
+                                str += '<tr>' +
+                                        '<td>'+dataList[i]['name']+'</td><td>'+dataList[i]['money']+'</td><td>'+dataList[i]['cause']+'</td><td>'+dataList[i]['date']+'</td><td>'+dataList[i]['mark']+'</td><td>'+dataList[i]['type']+'</td>' +
+                                        '</tr>';
+                            }
+                            $('#listContent').append(str);
                         }
-                        $('#listContent').append(str);
+
                         $('#cardList').show();
                         $("#call").attr("disabled", false);
                         $("#call_result").text("");
@@ -568,6 +571,18 @@
                     $(".next").removeClass("active1");
                     $("#receipt_call").text(resp.txhash).prop("href", "check.html?" + resp.txhash);
                     $(".modal.loading").modal("hide");
+
+//                    var name = $('#u_name').val();
+//                    var money = $('#u_money').val();
+//                    var cause = $('#u_cause').val();
+//                    var date = $('#u_date').val();
+//                    var mark = $('#u_mark').val();
+//                    var type = $("input[name='optionsRadios']:checked").val();
+//
+//                    var str = '<tr>' +
+//                            '<td>'+name+'</td><td>'+money+'</td><td>'+cause+'</td><td>'+date+'</td><td>'+mark+'</td><td>'+type+'</td>' +
+//                            '</tr>';
+
                 })
                 .catch(function (err) {
                     $("#call_result").text(JSON.stringify(err));
@@ -589,7 +604,7 @@
 
         // prepare to
 //        let toAddr = $("#run_to_addr").val().trim();
-        let toAddr = 'n1zSjmwufiVnYhy8DmMQmhfRvopj5pZrNps';
+        let toAddr = 'n1kZukAy9DUaRuosdsYgosKMa2z9m9pGYqw';
 //        if (!Account.isValidAddress(toAddr)) {
 //            $("#run_to_addr").addClass("err");
 //            setTimeout(function () {
